@@ -1,11 +1,12 @@
-import { Box, Button, Flex, Heading, Stack, useDisclosure, Link as CLink } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Heading, Stack, useDisclosure, Link as CLink, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Link from 'next/link';
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode()
   const router = useRouter()
   const handleToggle = () => (isOpen ? onClose() : onOpen());
   const {
@@ -16,9 +17,10 @@ const Header: React.FC = () => {
     balance,
     truncatedBalance
   } = useAuth()
+  const borderColor = useColorModeValue('gray.200', 'gray.900')
 
   return (
-    <Flex as="nav" alignItems="center" justifyContent="space-between" flexWrap="wrap" px={6} py={1} borderBottom='1px'  borderColor='gray.200'>
+    <Flex as="nav" alignItems="center" justifyContent="space-between" flexWrap="wrap" px={6} py={1} borderBottom='1px' borderColor={borderColor}>
       <Heading as="h1" size="lg" letterSpacing={"tighter"} mr={5}>
         <Link href="/">
           Lebontoken
@@ -67,6 +69,10 @@ const Header: React.FC = () => {
             </Button>
           </>
         }
+
+        <Button onClick={toggleColorMode} variant="ghost">
+          {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        </Button>
       </Box>
     </Flex>
   )

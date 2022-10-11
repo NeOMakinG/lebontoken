@@ -1,9 +1,12 @@
-import { Container, FormControl, FormHelperText, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { border, Container, FormControl, FormHelperText, FormLabel, Input, Textarea, useColorModeValue } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 
 const Post: NextPage = () => {
+  const formBackground = useColorModeValue('gray.50', 'gray.850')
+  const borderColor = useColorModeValue('gray.200', 'gray.900')
+
   return (
-    <Container maxW='container.sm' bg='gray.50' py={4} mt={4} borderRadius={3} border="1px" borderColor="gray.200">
+    <Container maxW='container.sm' bg={formBackground} py={4} mt={4} borderRadius={3} border="1px" borderColor={borderColor}>
       <FormControl mb={4}>
         <FormLabel>Title</FormLabel>
         <Input type='text' />
